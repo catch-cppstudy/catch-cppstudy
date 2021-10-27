@@ -39,23 +39,22 @@ int bfs(int rain) {
 }
 int main() {
 
-  int max = 0, min = 101; 
+  int _max = 0, _min = 101; 
   scanf("%d", &n);
   for(int i = 0; i < n; i++) {
      for(int j = 0; j < n; j++) {
         scanf("%d", &board[i][j]);
-        if(max < board[i][j]) max = board[i][j];
-        if(min > board[i][j]) min = board[i][j];
+        _max = max(_max, board[i][j]);
+        _min = min(_min, board[i][j]);
      }
   }
-  if(min == max) {
-    if(min == 1) printf("1\n");
-    else if (min == 100)  printf("0\n");
+  if(_min == _max) {
+    if(_min == 1 || _min == 100) printf("1\n");
     return 0;
   }
 
   int safety, answer = 0;
-  for(int i = 1; i <= max; i++) {
+  for(int i = 1; i <= _max; i++) {
     memset(check, false, sizeof(check));
     safety = bfs(i);  // 강수량 마다 확보할 수 있는 안전영역의 갯수를 리턴할 것임.
     if(answer < safety) answer = safety;
