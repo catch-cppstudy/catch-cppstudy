@@ -6,9 +6,9 @@ int alphaNumbers[26] = {3, 2, 1, 2, 3, 3, 3, 3, 1, 1, 3, 1, 3, 3, 1, 2, 2, 2, 1,
 
 int main(void)
 {
-    // ios::sync_with_stdio(false);
-    // cin.tie(NULL);
-    // cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     string str;
     cin >> str;
@@ -21,7 +21,6 @@ int main(void)
             sum %= 10;
     }
 
-    string answer;
-    answer = (sum % 2 == 1) ? "I'am a winner!" : "You're the winner?";
+    string answer = (sum % 2 == 1) ? "I'm a winner!" : "You're the winner?";
     cout << answer;
 }
