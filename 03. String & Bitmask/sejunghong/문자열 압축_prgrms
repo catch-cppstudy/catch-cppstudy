@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int solution(string s) {
+    int answer = 1001;
+    
+    //사이즈 1일 때
+    if(s.size() == 1)
+        return 1;
+    
+    for(int i=1; i<=s.size()/2; i++){
+        string zip = ""; //압축
+        string temp = "";
+        int cnt = 0;
+        for(int j=0; j<s.size(); j+=i){
+            if(temp == s.substr(j,i)){
+                cnt++;
+            }
+            else{
+                if(cnt != 0){
+                    if(cnt == 1)
+                        zip += temp; //숫자 1없이
+                    else
+                        zip += to_string(cnt) + temp; // 숫자 포함
+                }
+                cnt = 1;
+                temp = s.substr(j, i);
+            }
+        }
+        
+        if(cnt == 1)
+            zip += temp;
+        else
+            zip += to_string(cnt) + temp;
+        
+        answer = min(answer, (int)zip.size()); //작은 사이즈
+        //cout << zip << "\n";
+        
+    }
+    
+    return answer;
+}
