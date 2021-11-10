@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+#include <algorithm>
+
+using namespace std;
+
+vector<int> tu;
+
+//최소성
+bool minimality(int num) {
+    for (int i = 0; i < tu.size(); i++) {
+        if ((tu[i] & num) == min(tu[i], num))// 1101 & 1000 = 1000, ans[i] < num 무조건
+            return false;
+    }
+    return true;
+}
+
+int solution(vector<vector<string>> relation) {
+    int answer = 0;
+    
+    for(int i=1; i<(1<<relation[0].size()); i++){
+        map<string, int> m;
+        for(int j=0; j<relation.size(); j++){
+            string s = "";
+            for(int k=0; k<relation[0].size(); k++){
+                //겹치는 위치
+                if(i & (1<<k)){
+                    s += relation[j][k];
+                }
+            }
+            m[s]++; //증가
+        }
+        if(m.size() == relation.size() && minimality(i)){
+            answer++;
+            tu.push_back(i);
+        }
+    }
+    
+    
+    return answer;
+}
