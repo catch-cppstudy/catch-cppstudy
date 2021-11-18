@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<int> solution(int n) {
+    vector<int> answer;
+    int n_copy = n;
+    int triangle[1001][1001] = {0,};
+    int way = 1; // 1: 왼쪽 밑, 2: 오른쪽, 3: 왼쪽 위
+    int num = 1;
+    int col = 0; int row = 0;
+    int count = 0;
+    while(1){
+        if(n == 0)
+            break;
+        // 1: 왼쪽 밑
+        if(way == 1){
+            triangle[col][row] = num;
+            count++;
+            if(count == n){
+                way = 2;
+                row++;
+                n--;
+                count = 0;
+            }
+            else
+                col++;
+        }
+        // 2: 오른쪽
+        else if(way == 2){
+            triangle[col][row] = num;
+            count++;
+            if(count == n){
+                way = 3;
+                col--;
+                row--;
+                n--;
+                count = 0;
+            }
+            else
+                row++;
+        }
+        //3: 왼쪽 위
+        else{
+            triangle[col][row] = num;
+            count++;
+            if(count == n){
+                way = 1;
+                col++;
+                n--;
+                count = 0;
+            }
+            else{
+                col--;
+                row--;
+            }
+        }
+        num++;
+    }
+    
+    
+    for(int i=0; i < n_copy; i++){
+        for(int j=0; j<i+1; j++){
+            answer.push_back(triangle[i][j]);
+        }
+    }
+    
+    
+    return answer;
+}
