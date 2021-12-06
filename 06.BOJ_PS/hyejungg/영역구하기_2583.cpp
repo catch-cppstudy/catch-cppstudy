@@ -84,8 +84,8 @@ int main()
         }
     }
 
-    // set<int> answer; //default : 오름차순 정렬 ................ 인데 set 쓰면 틀렸습니다 뜸 ...
-    vector<int> answer;
+    multiset<int> answer; //set 쓰면 중복 수를 고려하지 않아서 multiset을 써야 오류 안남!
+    //vector<int> answer;
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
@@ -95,13 +95,13 @@ int main()
                 // cnt = 0;
                 // dfs(i, j);
                 bfs(i, j);
-                // answer.insert(cnt);
-                answer.push_back(cnt);
+                answer.insert(cnt);
+                //answer.push_back(cnt);
             }
         }
     }
 
-    sort(answer.begin(), answer.end());
+    //sort(answer.begin(), answer.end());
     cout << answer.size() << "\n";
     for (auto a : answer)
         cout << a << " ";
